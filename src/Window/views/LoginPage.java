@@ -35,6 +35,9 @@ public class LoginPage extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		Login();
+	}
+	public static void Login() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -46,7 +49,6 @@ public class LoginPage extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -123,7 +125,9 @@ public class LoginPage extends JFrame {
 		// TODO Auto-generated method stub
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				RegisterPage rg = new RegisterPage();
+				rg.Register();
+				setInvisible();
 			}
 		});
 		
@@ -134,12 +138,19 @@ public class LoginPage extends JFrame {
 				
 				//String query = "SELECT * FROM Customers WHERE Username = '" + urn + "' AND Password = '" + pwd + "'";
 				//System.out.println(query);
-				
+				if(urn.equals("") || pwd.equals("")) {
+					JOptionPane.showMessageDialog(null, "Invalid Input");
+				}
 				Drive d = new Drive();
 				String information = d.getInfo(urn, pwd);
 				JOptionPane.showMessageDialog(null, information);
 			}
 		});
+	}
+	
+	protected void setInvisible() {
+		// TODO Auto-generated method stub
+		this.setVisible(false);
 	}
 
 }
