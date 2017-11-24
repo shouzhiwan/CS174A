@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -21,14 +22,18 @@ import java.awt.event.ActionEvent;
 
 public class RegisterPage extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField namefield;
 	private JTextField emailField;
 	private JTextField taxIdField;
 	private JTextField stateField;
 	private JTextField usernameField;
-	private JTextField passwordField;
-	private JTextField retypeField;
+	private JPasswordField passwordField;
+	private JPasswordField retypeField;
 	private JButton btnClearAll;
 	private JButton btnBack;
 	private JButton btnCreateAccount;
@@ -95,14 +100,14 @@ public class RegisterPage extends JFrame {
 		usernameField = new JTextField();
 		usernameField.setColumns(10);
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		passwordField.setColumns(10);
 		
 		JLabel lblYourInformation = new JLabel("Your Information");
 		
 		JLabel lblCreateYourAccount = new JLabel("Create Your Account");
 		
-		retypeField = new JTextField();
+		retypeField = new JPasswordField();
 		retypeField.setColumns(10);
 		
 		btnClearAll = new JButton("Clear");
@@ -245,8 +250,11 @@ public class RegisterPage extends JFrame {
 		                }
 		            }
 		        }
-				String pwd = passwordField.getText();
-				String pwdCheck = retypeField.getText();
+				String pwd = new String(passwordField.getPassword());
+				String pwdCheck = new String(retypeField.getPassword());
+				System.out.println(pwd);
+				System.out.println("\n");
+				System.out.println(pwdCheck);
 				if(flag == 0) {
 					if(pwd.equals(pwdCheck)) {
 						informations[0] = namefield.getText();
@@ -254,7 +262,7 @@ public class RegisterPage extends JFrame {
 						informations[2] = taxIdField.getText();
 						informations[3] = stateField.getText();
 						informations[4] = usernameField.getText();
-						informations[5] = passwordField.getText();
+						informations[5] = pwd;
 						Drive d = new Drive();
 						Boolean result = d.CreateAccount(informations);
 						if(result == true) {

@@ -3,6 +3,8 @@ package MainConnection;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.PreparedStatement;
 
 public class Drive {
@@ -11,17 +13,17 @@ public class Drive {
 		Connection connection = null;	
 		Statement statement = null;
 		try {
-			String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
+			String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
 			String USER = "root";
-			String PWD  = "81822188";
+			String PWD  = "password";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			// create statement
 			for (int i = 0; i<6;i++) {
 				System.out.println(information[i]);
 			}
 			//statement = connection.prepareStatement("INSERT INTO Customers ('Username', 'Password', 'Name', 'Email', 'TaxID', 'State') VALUES (?, ?, ?, ?, ?, ?)");
-			String Query = "INSERT INTO Customers ('Username', 'Password', 'Name', 'Email', 'TaxID', 'State') VALUES ('"+
-					information[4] + "', '" + information[5] +"', '" + information[0] +"', '" + information[1]+"', '" + Integer.parseInt(information[2]) +"', '" + information[3] + "');";
+			String Query = "INSERT INTO Customers VALUES ("+
+					"'" + information[4] + "', " + "'"+ information[5] + "', " + "'" +information[0] + "', '" + information[1] + "', " + information[2] +", '" + information[3] + "', "+ "'8888888888"  +"');";
 			System.out.println(Query);
 			//statement.setString(1, information[4]);
 			//statement.setString(2, information[5]);
@@ -46,9 +48,9 @@ public class Drive {
 		String information = "";
 			try {
 				// connection to the database
-				String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
+				String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
 				String USER = "root";
-				String PWD  = "81822188";
+				String PWD  = "password";
 				connection = DriverManager.getConnection(HOST, USER, PWD);
 				// create statement
 				statement = connection.createStatement();
@@ -65,7 +67,11 @@ public class Drive {
 
 					if((usr.equals(username)) && (pwd.equals(password))) {
 						information = resultSet.getString("Email");
+						break;
 					}
+				}
+				if(information=="") {
+					JOptionPane.showMessageDialog(null, "Wrong Username/Password Combination");
 				}
 				    // Perform other operations if needed
 

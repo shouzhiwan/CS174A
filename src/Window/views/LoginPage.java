@@ -11,6 +11,7 @@ import MainConnection.Drive;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -23,11 +24,12 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 
+
 public class LoginPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField usernameField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	private JButton btnRegister;
 	private JButton btnLogIn;
 	
@@ -72,7 +74,7 @@ public class LoginPage extends JFrame {
 		
 		JLabel lblUsername = new JLabel("Username");
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		passwordField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
@@ -134,7 +136,7 @@ public class LoginPage extends JFrame {
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String  urn = usernameField.getText();
-				String pwd = passwordField.getText();
+				String pwd = new String(passwordField.getPassword());
 				
 				//String query = "SELECT * FROM Customers WHERE Username = '" + urn + "' AND Password = '" + pwd + "'";
 				//System.out.println(query);
