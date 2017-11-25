@@ -13,9 +13,9 @@ public class Drive {
 		Connection connection = null;	
 		Statement statement = null;
 		try {
-			String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
+			String HOST = "jdbc:mysql://127.0.0.1:3306/shouzhiwanDB";
 			String USER = "root";
-			String PWD  = "password";
+			String PWD  = "81822188";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			// create statement
 			for (int i = 0; i<6;i++) {
@@ -23,7 +23,7 @@ public class Drive {
 			}
 			//statement = connection.prepareStatement("INSERT INTO Customers ('Username', 'Password', 'Name', 'Email', 'TaxID', 'State') VALUES (?, ?, ?, ?, ?, ?)");
 			String Query = "INSERT INTO Customers VALUES ("+
-					"'" + information[4] + "', " + "'"+ information[5] + "', " + "'" +information[0] + "', '" + information[1] + "', " + information[2] +", '" + information[3] + "', "+ "'8888888888"  +"');";
+					"'" + information[4] + "', " + "'"+ information[5] + "', " + "'" +information[0] + "', '" + information[1] + "', " + information[2] +", '" + information[3] + "', '"+ information[6]  +"');";
 			System.out.println(Query);
 			//statement.setString(1, information[4]);
 			//statement.setString(2, information[5]);
@@ -48,9 +48,9 @@ public class Drive {
 		String information = "";
 			try {
 				// connection to the database
-				String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
+				String HOST = "jdbc:mysql://127.0.0.1:3306/shouzhiwanDB";
 				String USER = "root";
-				String PWD  = "password";
+				String PWD  = "81822188";
 				connection = DriverManager.getConnection(HOST, USER, PWD);
 				// create statement
 				statement = connection.createStatement();
