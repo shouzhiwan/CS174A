@@ -145,7 +145,10 @@ public class LoginPage extends JFrame {
 				}
 				Drive d = new Drive();
 				String information = d.getInfo(urn, pwd);
-				JOptionPane.showMessageDialog(null, information);
+				AfterLoginPage alp = new AfterLoginPage();
+				alp.AfterLogin(urn);
+				setInvisible();
+				//JOptionPane.showMessageDialog(null, information);
 			}
 		});
 	}
