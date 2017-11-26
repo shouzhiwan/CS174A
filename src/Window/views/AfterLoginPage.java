@@ -113,26 +113,38 @@ public class AfterLoginPage extends JFrame {
 		// TODO Auto-generated method stub
 		btnMyInformation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MyInformationPage mip = new MyInformationPage();
+				mip.MyInformation(user);
+				setInvisible();
 			}
 		});
 		
 		btnMyAccounts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				MyAccountPage map = new MyAccountPage();
+				map.MyAccount(user);
+				setInvisible();
 			}
 		});
 		
 		btnStockMarket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				StockMarketPage smp = new StockMarketPage();
+				smp.StockMarket(user);
+				setInvisible();
 			}
 		});
 		
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				LoginPage lp = new LoginPage();
+				lp.Login();
+				setInvisible();
 			}
 		});
+	}
+	protected void setInvisible() {
+		// TODO Auto-generated method stub
+		this.setVisible(false);
 	}
 }
