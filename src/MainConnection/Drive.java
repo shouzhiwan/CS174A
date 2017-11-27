@@ -5,17 +5,15 @@ import java.sql.*;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.PreparedStatement;
-
 public class Drive {
 
 	public Boolean CreateAccount(String[] information){
 		Connection connection = null;	
 		Statement statement = null;
 		try {
-			String HOST = "jdbc:mysql://127.0.0.1:3306/shouzhiwanDB";
+			String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
 			String USER = "root";
-			String PWD  = "81822188";
+			String PWD  = "123456";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			// create statement
 			for (int i = 0; i<6;i++) {
@@ -48,27 +46,22 @@ public class Drive {
 		String information = "";
 			try {
 				// connection to the database
-				String HOST = "jdbc:mysql://127.0.0.1:3306/shouzhiwanDB";
+				String HOST = "jdbc:mysql://127.0.0.1:3306/STOCK";
 				String USER = "root";
-				String PWD  = "81822188";
+				String PWD  = "123456";
 				connection = DriverManager.getConnection(HOST, USER, PWD);
 				// create statement
 				statement = connection.createStatement();
 				
 				// Execute SQL
 				//get value
-				String QUERY = "SELECT * FROM Customers";
+				String QUERY = "SELECT * FROM Customers WHERE Username = " + "'" +username + "'" +";";
 				//String QUERY = "SELECT * FROM Customers WHERE Username = 'shouzhiwan'";
 				ResultSet resultSet = statement.executeQuery(QUERY);
-				
-				while(resultSet.next()) {
-					String usr = resultSet.getString("Username");
-					String pwd = resultSet.getString("Password");
-
-					if((usr.equals(username)) && (pwd.equals(password))) {
-						information = resultSet.getString("Email");
-						break;
-					}
+				int userExist = resultSet.last() ? resultSet.getRow() : 0;
+				if(userExist == 1 && resultSet.getString("Password").equals(password)) {
+					information = "correct";
+					
 				}
 				if(information=="") {
 					JOptionPane.showMessageDialog(null, "Wrong Username/Password Combination");
