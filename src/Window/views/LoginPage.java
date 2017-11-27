@@ -141,13 +141,17 @@ public class LoginPage extends JFrame {
 				//String query = "SELECT * FROM Customers WHERE Username = '" + urn + "' AND Password = '" + pwd + "'";
 				//System.out.println(query);
 				if(urn.equals("") || pwd.equals("")) {
-					JOptionPane.showMessageDialog(null, "Invalid Input");
+					JOptionPane.showMessageDialog(null, "Invalid Input");			
 				}
-				Drive d = new Drive();
-				String information = d.getInfo(urn, pwd);
-				AfterLoginPage alp = new AfterLoginPage();
-				alp.AfterLogin(urn);
-				setInvisible();
+				else {
+					Drive d = new Drive();
+					String information = d.getInfo(urn, pwd);
+					if(!information.equals("")) {
+						AfterLoginPage alp = new AfterLoginPage();
+						alp.AfterLogin(urn);
+						setInvisible();
+					}
+				}
 				//JOptionPane.showMessageDialog(null, information);
 			}
 		});
