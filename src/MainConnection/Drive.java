@@ -37,7 +37,7 @@ public class Drive {
 			//}
 			//statement = connection.prepareStatement("INSERT INTO Customers ('Username', 'Password', 'Name', 'Email', 'TaxID', 'State') VALUES (?, ?, ?, ?, ?, ?)");
 			String Query = "INSERT INTO Customers VALUES ("+
-					"'" + information[4] + "', " + "'"+ information[5] + "', " + "'" +information[0] + "', '" + information[1] + "', " + information[2] +", '" + information[3] + "', '"+ information[6]  +"');";
+					"'" + information[4] + "', " + "'"+ information[5] + "', " + "'" +information[0] + "', '" + information[1] + "', " + information[2] +", '" + information[3] + "', '"+ information[6]  + "', '"+ information[8] + "', '"+ information[7] +"');";
 			//System.out.println(Query);
 			
 			String count = "SELECT * FROM Market_Account_Have";

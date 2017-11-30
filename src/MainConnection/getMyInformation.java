@@ -24,7 +24,7 @@ public class getMyInformation {
 		
 	}
 	public String[] getBasicInformations(String username) {
-		String[] information = new String[6];
+		String[] information = new String[8];
 		try {
 			String QUERY = "SELECT * FROM Customers WHERE Username = " + "'" +username + "'" +";";
 			ResultSet resultSet = statement.executeQuery(QUERY);
@@ -37,6 +37,8 @@ public class getMyInformation {
 				information[3] = resultSet.getString("State");
 				information[4] = resultSet.getString("Phone");
 				information[5] = resultSet.getString("Password");
+				information[6] = resultSet.getString("Address");
+				information[7] = resultSet.getString("SSN");
 			}
 		}
 		catch (Exception exc) {
@@ -49,8 +51,8 @@ public class getMyInformation {
 	public Boolean UpdateInformation(String[] information, String user) {
 		try {
 			String QUERY = "UPDATE Customers SET NAME ='" + information[0] + "', Email='" + information[1] + "', TaxID='" +
-					information[2] + "', State='" + information[3] + "', Phone='" + information[4] + 
-					"' WHERE Username = " + "'" + user + "'" +";";
+					information[2] + "', State='" + information[3] + "', Phone='" + information[4] + "', SSN='" + information[5] + "', Address='" + information[6] + 
+					"' WHERE Username = " + "'" + user + "'" + ";";
 			//System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
 			return true;
@@ -74,6 +76,6 @@ public class getMyInformation {
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		return null;
+		return false;
 	}
 }

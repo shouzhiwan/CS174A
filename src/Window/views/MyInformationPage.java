@@ -32,8 +32,12 @@ public class MyInformationPage extends JFrame {
 	private JTextField StateField;
 	private JButton btnEditInformation;
 	private JButton btnChangePassword;
-	private String[] information = new String[6];
+	private String[] information = new String[8];
 	getMyInformation myInfo;
+	private JLabel lblSsn;
+	private JTextField SSNField;
+	private JLabel lblAddress;
+	private JTextField AddressField;
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +66,7 @@ public class MyInformationPage extends JFrame {
 		this.user = theUser;
 		//getMyInformation 
 		myInfo = new getMyInformation();
-		System.arraycopy(myInfo.getBasicInformations(this.user), 0 , information, 0 , 6 ); 
+		System.arraycopy(myInfo.getBasicInformations(this.user), 0 , information, 0 , 8 ); 
 		initComponents();
 		createEvent();	
 	}
@@ -73,7 +77,7 @@ public class MyInformationPage extends JFrame {
 		// TODO Auto-generated method stub
 		setTitle("The Information for " + this.user);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 345);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,81 +119,105 @@ public class MyInformationPage extends JFrame {
 		
 		btnChangePassword = new JButton("Change Password");
 		
+		lblSsn = new JLabel("SSN");
+		
+		SSNField = new JTextField();
+		SSNField.setColumns(10);
+		SSNField.setText(information[7]);
+		lblAddress = new JLabel("Address");
+		
+		AddressField = new JTextField();
+		AddressField.setColumns(10);
+		AddressField.setText(information[6]);
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblPhoneNumber)
-							.addGap(18)
-							.addComponent(PhoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblState)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(StateField, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addComponent(lblEmail)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(EmailField))
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addComponent(lblName)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(NameField, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lblTaxid)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(TaxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnMyAccount)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnStockMarket)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnGoBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-								.addComponent(btnChangePassword, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(btnEditInformation, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(41, Short.MAX_VALUE))
+							.addGap(27)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblEmail)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(EmailField, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblName)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(NameField, GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblSsn)
+									.addGap(18)
+									.addComponent(SSNField, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblTaxid)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(TaxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblAddress)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(AddressField, GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(28)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnChangePassword, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnEditInformation, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblPhoneNumber)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(PhoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblState)
+									.addGap(18)
+									.addComponent(StateField, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnMyAccount)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnStockMarket)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnGoBack, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))))
+					.addGap(72))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(31)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblName)
-								.addComponent(NameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTaxid))
-							.addGap(16))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(TaxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(NameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(16)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEmail)
 						.addComponent(EmailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSsn)
+						.addComponent(SSNField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(TaxField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTaxid))
+					.addGap(10)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAddress)
+						.addComponent(AddressField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPhoneNumber)
 						.addComponent(PhoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblState)
 						.addComponent(StateField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnChangePassword)
 						.addComponent(btnEditInformation))
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnMyAccount)
 						.addComponent(btnStockMarket)
 						.addComponent(btnGoBack))
-					.addContainerGap())
+					.addGap(59))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -204,6 +232,8 @@ public class MyInformationPage extends JFrame {
 				informations[2] = TaxField.getText();
 				informations[3] = StateField.getText();
 				informations[4] = PhoneField.getText();
+				informations[5] = SSNField.getText();
+				informations[6] = AddressField.getText();
 				Boolean result = myInfo.UpdateInformation(informations, user);
 				if (result) {
 					JOptionPane.showMessageDialog(null, "Update your information Succeed!!");

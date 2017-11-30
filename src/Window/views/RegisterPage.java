@@ -39,6 +39,8 @@ public class RegisterPage extends JFrame {
 	private JButton btnCreateAccount;
 	private JLabel lblPhone;
 	private JTextField phoneField;
+	private JTextField SSNField;
+	private JTextField AddressField;
 
 	/**
 	 * Launch the application.
@@ -68,7 +70,7 @@ public class RegisterPage extends JFrame {
 		// TODO Auto-generated method stub
 		setTitle("Create An Account for Me");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 458);
+		setBounds(100, 100, 402, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -121,9 +123,19 @@ public class RegisterPage extends JFrame {
 		
 		lblPhone = new JLabel("Phone");
 		
+		JLabel lblSsn = new JLabel("SSN");
+		
+		SSNField = new JTextField();
+		SSNField.setColumns(10);
+		
+		JLabel lblAddress = new JLabel("Address");
+		
+		AddressField = new JTextField();
+		AddressField.setColumns(10);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -132,7 +144,6 @@ public class RegisterPage extends JFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(39)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblUsername)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblName)
@@ -143,87 +154,100 @@ public class RegisterPage extends JFrame {
 										.addComponent(emailField)))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(passwordField)
-											.addComponent(usernameField)
-											.addComponent(lblPassword, Alignment.LEADING)
-											.addComponent(lblRetypePassword, Alignment.LEADING)
-											.addComponent(retypeField, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(14)
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-													.addComponent(btnCreateAccount)
-													.addComponent(btnBack)))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(18)
-												.addComponent(btnClearAll))))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblPhone)
-											.addComponent(lblTaxid))
+											.addComponent(lblUsername)
+											.addComponent(usernameField, 215, 215, 215)
+											.addComponent(lblPassword)
+											.addComponent(passwordField, 215, 215, 215)
+											.addComponent(lblRetypePassword)
+											.addComponent(retypeField, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
 										.addGap(18)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(phoneField)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(taxIdField, 155, 155, 155)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(lblState)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(stateField, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)))))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(142)
-							.addComponent(lblCreateYourAccount)))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(btnCreateAccount, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(btnClearAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblAddress)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(AddressField, GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE))
+									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+										.addComponent(lblTaxid)
+										.addGap(18)
+										.addComponent(taxIdField, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblSsn)
+										.addGap(18)
+										.addComponent(SSNField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(lblPhone)
+										.addGap(18)
+										.addComponent(phoneField, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+										.addGap(9)
+										.addComponent(lblState)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(stateField, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED))))))
 					.addGap(89))
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGap(155)
+					.addComponent(lblCreateYourAccount)
+					.addContainerGap(217, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblYourInformation)
-							.addGap(16)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblName)
-								.addComponent(namefield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblEmail)
-								.addComponent(emailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTaxid)
-								.addComponent(taxIdField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblState)
-								.addComponent(stateField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(146)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(phoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblPhone))))
+					.addContainerGap()
+					.addComponent(lblYourInformation)
+					.addGap(16)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(namefield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblEmail)
+						.addComponent(emailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTaxid)
+						.addComponent(taxIdField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSsn)
+						.addComponent(SSNField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(12)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAddress)
+						.addComponent(AddressField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(16)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblState)
+							.addComponent(stateField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(phoneField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblPhone)))
 					.addGap(18)
 					.addComponent(lblCreateYourAccount)
-					.addGap(22)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblUsername)
-					.addGap(9)
+					.addGap(2)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnClearAll))
+						.addComponent(btnBack))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblPassword)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBack))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblRetypePassword)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(retypeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnCreateAccount))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblRetypePassword)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(retypeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnClearAll))
+					.addGap(184))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
@@ -255,7 +279,7 @@ public class RegisterPage extends JFrame {
 		
 		btnCreateAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] informations = new String[7];
+				String[] informations = new String[9];
 				
 				int flag = 0;
 				for (Component c : contentPane.getComponents())
@@ -284,6 +308,8 @@ public class RegisterPage extends JFrame {
 						informations[4] = usernameField.getText();
 						informations[5] = pwd;
 						informations[6] = phoneField.getText();
+						informations[7] = SSNField.getText();
+						informations[8] = AddressField.getText();
 						Drive d = new Drive();
 						Boolean result = d.CreateAccount(informations);
 						if(result == true) {
