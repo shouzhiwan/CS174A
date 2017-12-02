@@ -32,6 +32,8 @@ public class BuyPage extends JFrame {
 	getStockInformation stockInfo;
 	private JComboBox StockComboBox;
 	private JTable table;
+	DefaultTableModel tm;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -88,7 +90,7 @@ public class BuyPage extends JFrame {
 		
 		JLabel lblStock = new JLabel("Stock");
 		
-		DefaultTableModel tm = new DefaultTableModel();
+		tm = new DefaultTableModel();
 		table = new JTable(tm);
 		table.setModel(new DefaultTableModel(
 				new Object[][] {

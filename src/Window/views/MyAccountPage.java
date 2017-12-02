@@ -299,7 +299,7 @@ public class MyAccountPage extends JFrame {
 				//Need to send requests to the manager to make the transfer
 				String Typein = JOptionPane.showInputDialog("Please type the Amount you want to Deposit");
 				double number = Double.valueOf(Typein);
-				myAcc.addRequests(number, user, "Deposit");
+				myAcc.addRequests(number, user);
 				JOptionPane.showMessageDialog(null, "Request Send, Wait for Manager to Comfirm!");
 			}
 		});
@@ -308,7 +308,7 @@ public class MyAccountPage extends JFrame {
 				//Need to send request to the manager to make the transfer
 				String Typein = JOptionPane.showInputDialog("Please type the Amount you want to Withdraw");
 				double number = -1 * Double.valueOf(Typein);
-				myAcc.addRequests(number, user, "Withdraw");
+				myAcc.addRequests(number, user);
 				JOptionPane.showMessageDialog(null, "Request Send, Wait for Manager to Comfirm!");
 			}
 		});
@@ -333,8 +333,8 @@ public class MyAccountPage extends JFrame {
 					StockBalance.setText("$ " + StockBal);
 					JOptionPane.showMessageDialog(null, "You have created a Stock Account");
 				}
-				//SellPage sp = new SellPage();
-				//sp.SellStock();
+				SellPage sp = new SellPage();
+				sp.SellStock(user);
 			}
 		});
 	}

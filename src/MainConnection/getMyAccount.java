@@ -69,7 +69,7 @@ public class getMyAccount {
 			rowcount ++;
 			String AddAccount = "INSERT INTO Stock_Account VALUES ("+
 				"'" + rowcount + "', " + 0.00 + ", '" + theUser +"');";
-			System.out.println(AddAccount);
+			//System.out.println(AddAccount);
 			statement.executeUpdate(AddAccount);
 			return true;
 		}
@@ -86,16 +86,10 @@ public class getMyAccount {
 		SetNewBalance(MarketAmount, "Market_Account_Have", theUser);
 		SetNewBalance(StockAmount, "Stock_Account", theUser);
 	}
-	public void addRequests(double amount, String theUser, String Type){
+	public void addRequests(double amount, String theUser){
 		try {
-			String count = "SELECT * FROM Requests";
-			ResultSet resultSet = statement.executeQuery(count);
-			int  rowcount = resultSet.last() ? resultSet.getRow() : 0;
-			rowcount ++;
-			String AddAccount = "INSERT INTO Requests VALUES ("+
-				"'" + rowcount + "', '" + theUser + "', '" + Type +"', "+ amount + ");";
-			System.out.println(AddAccount);
-			statement.executeUpdate(AddAccount);
+			double MarketAmount = getMarketAccount(theUser) + amount;
+			SetNewBalance(MarketAmount, "Market_Account_Have", theUser);
 		}
 		catch (Exception exc) {
 			exc.printStackTrace();
@@ -103,7 +97,7 @@ public class getMyAccount {
 	}
 	public void SetNewBalance(double amount, String Type, String theUser) {
 		try {
-			String QUERY = "UPDATE "+ Type +" SET Balance =" + amount + 
+			String QUERY = "UPDATE " + Type +" SET Balance =" + amount + 
 					" WHERE Username = " + "'" + theUser + "'" +";";
 			//System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
@@ -113,6 +107,8 @@ public class getMyAccount {
 		}
 		
 	}
+
+
 	
 	
 }
