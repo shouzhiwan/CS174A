@@ -404,6 +404,7 @@ public class StockMarketPage extends JFrame {
 				double number = -1 * Double.valueOf(Typein);
 				myAcc.addRequests(number, user);
 				MarketBal = myAcc.getMarketAccount(user);
+				stockInfo.AddRecord(user, 0, "", "Withdraw", MarketBal);
 				Moneylabel.setText("$ " + MarketBal);
 				JOptionPane.showMessageDialog(null, "Withdraw Completed");
 			}
@@ -415,6 +416,7 @@ public class StockMarketPage extends JFrame {
 					double number = Double.valueOf(Typein);
 					myAcc.addRequests(number, user);
 					MarketBal = myAcc.getMarketAccount(user);
+					stockInfo.AddRecord(user, 0, "", "Deposit", MarketBal);
 					Moneylabel.setText("$ " + MarketBal);
 					JOptionPane.showMessageDialog(null, "Deposit Completed");
 			}
@@ -450,6 +452,7 @@ public class StockMarketPage extends JFrame {
 					myAcc.addRequests(amount, user);
 					MarketBal = myAcc.getMarketAccount(user);
 					Moneylabel.setText("$ " + MarketBal);
+					stockInfo.AddRecord(user, shares, symbol, "Sell", MarketBal);
 					JOptionPane.showMessageDialog(null, "Sell Completed");
 					refreshpage();
 				}
@@ -471,6 +474,7 @@ public class StockMarketPage extends JFrame {
 					myAcc.addRequests(amount, user);
 					MarketBal = myAcc.getMarketAccount(user);
 					Moneylabel.setText("$ " + MarketBal);
+					stockInfo.AddRecord(user, shares, symbol, "Buy", MarketBal);
 					JOptionPane.showMessageDialog(null, "Buy Completed");
 					refreshpage();
 				}

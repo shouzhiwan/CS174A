@@ -340,6 +340,7 @@ public class getStockInformation {
 			}
 			
 		}
+
 	}
 	private void SetStockPrice(String symbol, double price) {
 		// TODO Auto-generated method stub
@@ -358,5 +359,23 @@ public class getStockInformation {
 		int share = getShare(symbol,theUser) + shares;
 		SetShare(symbol,share, theUser);
 	}
-
+	public void AddRecord(String theUser, int Shares, String Stock_Symbol, String Type, double balance) {
+		String Date = null;
+		try {
+			String Query = "SELECT Date AS Date FROM Manager WHERE Username='admin'";
+			ResultSet resultSet = statement.executeQuery(Query);
+			Date = resultSet.getString("Date");
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		try {
+			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Balance) VALUES ("+
+					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " +balance + ");";
+			statement.executeUpdate(query);
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+	}
 }
