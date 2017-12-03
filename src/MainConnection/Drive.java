@@ -12,9 +12,9 @@ public class Drive {
 	public Drive() {
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/ShouzhiwanDB?autoReconnect=true&useSSL=false";
+			String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
 			String USER = "root";
-			String PWD  = "81822188";
+			String PWD  = "123456";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 		}
 		catch (Exception exc) {

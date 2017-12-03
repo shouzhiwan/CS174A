@@ -13,9 +13,9 @@ public class getStockInformation {
 		
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/ShouzhiwanDB?autoReconnect=true&useSSL=false";
+			String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
 			String USER = "root";
-			String PWD  = "81822188";
+			String PWD  = "123456";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			statement = connection.createStatement();
 		}
@@ -370,8 +370,8 @@ public class getStockInformation {
 			exc.printStackTrace();
 		}
 		try {
-			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Balance) VALUES ("+
-					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " +balance + ");";
+			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Balance, Date) VALUES ("+
+					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " + balance +", " + Date + ");";
 			statement.executeUpdate(query);
 		}
 		catch (Exception exc) {
