@@ -146,9 +146,15 @@ public class LoginPage extends JFrame {
 				else {
 					Drive d = new Drive();
 					String information = d.getInfo(urn, pwd);
-					if(!information.equals("")) {
+					if(information.equals("correct")) {
 						AfterLoginPage alp = new AfterLoginPage();
 						alp.AfterLogin(urn);
+						setInvisible();
+					}
+					else if (information.equals("manager")) {
+						JOptionPane.showMessageDialog(null, "Hello Manager");		
+						ManagerPage mg = new ManagerPage();
+						mg.Manager(urn);
 						setInvisible();
 					}
 				}

@@ -12,9 +12,9 @@ public class Drive {
 	public Drive() {
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
+			String HOST = "jdbc:mysql://localhost:3306/jinfaDB?autoReconnect=true&useSSL=false";
 			String USER = "root";
-			String PWD  = "123456";
+			String PWD  = "81822188";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 		}
 		catch (Exception exc) {
@@ -97,6 +97,19 @@ public class Drive {
 			}
 			catch (Exception exc) {
 				exc.printStackTrace();
+			}
+			if(information == "correct") {
+				try {
+					statement = connection.createStatement();
+					String QUERY = "SELECT * FROM Manager WHERE Username = " + "'" +username + "'" +";";
+					ResultSet resultSet = statement.executeQuery(QUERY);
+					int userExist = resultSet.last() ? resultSet.getRow() : 0;
+					if(userExist == 1)
+						information = "manager";
+				}
+				catch (Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 			return information;
 			

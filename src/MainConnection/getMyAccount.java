@@ -12,9 +12,9 @@ public class getMyAccount {
 	public getMyAccount() {
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
+			String HOST = "jdbc:mysql://localhost:3306/jinfaDB?autoReconnect=true&useSSL=false";
 			String USER = "root";
-			String PWD  = "123456";
+			String PWD  = "81822188";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			statement = connection.createStatement();
 		}

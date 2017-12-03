@@ -1,6 +1,7 @@
 package MainConnection;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -13,9 +14,12 @@ public class getStockInformation {
 		
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
+			String HOST = "jdbc:mysql://localhost:3306/jinfaDB?autoReconnect=true&useSSL=false";
 			String USER = "root";
-			String PWD  = "123456";
+			String PWD  = "81822188";
+			//String HOST = "jdbc:mysql://localhost:3306/jinfaDb";
+			//String USER = "root";
+			//String PWD  = "123456";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			statement = connection.createStatement();
 		}
@@ -360,18 +364,21 @@ public class getStockInformation {
 		SetShare(symbol,share, theUser);
 	}
 	public void AddRecord(String theUser, int Shares, String Stock_Symbol, String Type, double balance) {
-		String Date = null;
+		Date Date=null;
 		try {
-			String Query = "SELECT Date AS Date FROM Manager WHERE Username='admin'";
+			String Query = "SELECT Date FROM Manager WHERE Username='admin';";
 			ResultSet resultSet = statement.executeQuery(Query);
-			Date = resultSet.getString("Date");
+			while(resultSet.next())
+				Date = resultSet.getDate("Date");
+			System.out.println(Date.toString());
 		}
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
 		try {
 			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Balance, Date) VALUES ("+
-					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " + balance +", " + Date + ");";
+					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " + balance +", " +"'"+ Date+ "');";
+			//System.out.println(query);
 			statement.executeUpdate(query);
 		}
 		catch (Exception exc) {
