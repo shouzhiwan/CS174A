@@ -70,6 +70,7 @@ public class StockMarketPage extends JFrame {
 	private JButton btnRefresh;
 	private JLabel totalValue;
 	double yourtotalvalue = 0.00;
+	Boolean MarketStatus = false;
 	/**
 	 * Launch the application.
 	 */
@@ -108,7 +109,9 @@ public class StockMarketPage extends JFrame {
 		YourStockInfo = new String[yourStockNum];
 		MarketStockInfo = new String[NumStock];
 		yourtotalvalue = stockInfo.getUserTotalPrice(user);
+		MarketStatus = stockInfo.getMarketStatus();
 		//stockInfo.getStockSym();
+		
 		System.arraycopy(stockInfo.getStockSym(), 0 , Stocks, 0 , NumStock); 
 		System.arraycopy(stockInfo.getUserStock(theUser), 0 , yourStocks, 0 , yourStockNum);
 		System.arraycopy(stockInfo.getMarketStockInformation(), 0 , MarketStockInfo, 0 , NumStock);
@@ -197,7 +200,7 @@ public class StockMarketPage extends JFrame {
 		
 		lblShares_2 = new JLabel("Shares");
 		
-		lblCurrentprice = new JLabel("CurrentPrice");
+		lblCurrentprice = new JLabel("Avg Price");
 		
 		btnGetInformation = new JButton("Get Information");
 		
@@ -404,7 +407,7 @@ public class StockMarketPage extends JFrame {
 				double number = -1 * Double.valueOf(Typein);
 				myAcc.addRequests(number, user);
 				MarketBal = myAcc.getMarketAccount(user);
-				stockInfo.AddRecord(user, 0, "", "Withdraw", MarketBal);
+				stockInfo.AddRecord(user, 000, "N/A", "Withdraw", number ,MarketBal, 0.00);
 				Moneylabel.setText("$ " + MarketBal);
 				JOptionPane.showMessageDialog(null, "Withdraw Completed");
 			}
@@ -416,7 +419,7 @@ public class StockMarketPage extends JFrame {
 					double number = Double.valueOf(Typein);
 					myAcc.addRequests(number, user);
 					MarketBal = myAcc.getMarketAccount(user);
-					stockInfo.AddRecord(user, 0, "", "Deposit", MarketBal);
+					stockInfo.AddRecord(user, 000, "N/A", "Deposit", number, MarketBal, 0.00);
 					Moneylabel.setText("$ " + MarketBal);
 					JOptionPane.showMessageDialog(null, "Deposit Completed");
 			}
@@ -440,43 +443,53 @@ public class StockMarketPage extends JFrame {
 		
 		btnSell.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String symbol = (String) YourStockcomboBox.getSelectedItem();
-				double price = Double.parseDouble(YourPrice.getText());
-				int shares = Integer.parseInt(YourNumShare.getText());
-				if(stockInfo.getShare(symbol, user) < shares) {
-					JOptionPane.showMessageDialog(null, "Failed, You don't have that many shares to sell");
+				if(stockInfo.getMarketStatus()) {
+					String symbol = (String) YourStockcomboBox.getSelectedItem();
+					double price = Double.parseDouble(YourPrice.getText());
+					int shares = Integer.parseInt(YourNumShare.getText());
+					if(stockInfo.getShare(symbol, user) < shares) {
+						JOptionPane.showMessageDialog(null, "Failed, You don't have that many shares to sell");
+					}
+					else {
+						double earned = stockInfo.sellStock(symbol, price,shares,user);
+						double amount = price*shares;
+						myAcc.addRequests(amount, user);
+						MarketBal = myAcc.getMarketAccount(user);
+						Moneylabel.setText("$ " + MarketBal);
+						stockInfo.AddRecord(user, shares, symbol, "Sell", amount, MarketBal, earned);
+						JOptionPane.showMessageDialog(null, "Sell Completed");
+						refreshpage();
+					}
 				}
 				else {
-					stockInfo.sellStock(symbol, price,shares,user);
-					double amount = price*shares;
-					myAcc.addRequests(amount, user);
-					MarketBal = myAcc.getMarketAccount(user);
-					Moneylabel.setText("$ " + MarketBal);
-					stockInfo.AddRecord(user, shares, symbol, "Sell", MarketBal);
-					JOptionPane.showMessageDialog(null, "Sell Completed");
-					refreshpage();
+					JOptionPane.showMessageDialog(null, "Market Closed!!");	
 				}
 			}
 		});
 		
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String symbol = (String) MarketStockcomboBox.getSelectedItem();
-				double price = Double.parseDouble(MarketPriceField.getText());
-				int shares = Integer.parseInt(NumShare.getText());
-				double amount = price*shares;
-				if(myAcc.getMarketAccount(user) < amount) {
-					JOptionPane.showMessageDialog(null, "Failed, You don't have that much money to buy");
+				if(stockInfo.getMarketStatus()) {
+					String symbol = (String) MarketStockcomboBox.getSelectedItem();
+					double price = Double.parseDouble(MarketPriceField.getText());
+					int shares = Integer.parseInt(NumShare.getText());
+					double amount = price*shares + 20;
+					if(myAcc.getMarketAccount(user) < amount) {
+						JOptionPane.showMessageDialog(null, "Failed, You don't have that much money to buy");
+					}
+					else {
+						stockInfo.buyStock(symbol, price,shares,user);
+						amount = -1 * amount;
+						myAcc.addRequests(amount, user);
+						MarketBal = myAcc.getMarketAccount(user);
+						Moneylabel.setText("$ " + MarketBal);
+						stockInfo.AddRecord(user, shares, symbol, "Buy", amount, MarketBal, 0.00);
+						JOptionPane.showMessageDialog(null, "Buy Completed");
+						refreshpage();
+					}
 				}
 				else {
-					stockInfo.buyStock(symbol, price,shares,user);
-					amount = -1 * amount;
-					myAcc.addRequests(amount, user);
-					MarketBal = myAcc.getMarketAccount(user);
-					Moneylabel.setText("$ " + MarketBal);
-					stockInfo.AddRecord(user, shares, symbol, "Buy", MarketBal);
-					JOptionPane.showMessageDialog(null, "Buy Completed");
-					refreshpage();
+					JOptionPane.showMessageDialog(null, "Market Closed!!");
 				}
 			}
 		});

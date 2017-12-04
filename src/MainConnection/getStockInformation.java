@@ -139,7 +139,7 @@ public class getStockInformation {
 				//}
 				//double price = getPrice(symbol);
 				Symbol[i] = resultSet.getString("Stock_Symbol");
-				Information[i] = resultSet.getString("Stock_Symbol") + "       "+resultSet.getString("Number_Shares") + "       " ;
+				Information[i] = String.format("%-10s %-10s %3.2f", resultSet.getString("Stock_Symbol"), resultSet.getString("Number_Shares"),resultSet.getDouble("Ave_Price"));
 				//System.out.println(Stocks[i]);
 				i++;
 			}
@@ -148,10 +148,7 @@ public class getStockInformation {
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
-		for(int i=0; i<num;i++) {
-			double price = getPrice(Symbol[i]);
-			Information[i] +=  price;
-		}
+		
 		
 		return Information;
 	}
@@ -249,6 +246,40 @@ public class getStockInformation {
 		
 		return 0;
 	}
+	public double getAve_Price(String symbol, String theUser) {
+		// TODO Auto-generated method stub
+		int TaxId = 0;
+		int num = getyoutStockNum(theUser);
+		
+		try {
+			String Query = "SELECT * FROM Customers WHERE Username = " + "'" + theUser + "'" +";";
+			ResultSet resultSet = statement.executeQuery(Query);
+			int userExist = resultSet.last() ? resultSet.getRow() : 0;
+			if(userExist == 1) {
+				TaxId = resultSet.getInt("TaxID");
+			}
+			else {
+				TaxId = -1;
+			}
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		try {
+			String Query = "SELECT * FROM Stock_Transaction WHERE Stock_Symbol = " + "'" + symbol + "'" + "AND TaxID = " + TaxId +";";
+			ResultSet resultSet = statement.executeQuery(Query);
+			int userExist = resultSet.last() ? resultSet.getRow() : 0;
+			if(userExist == 1) {
+				 return resultSet.getDouble("Ave_Price");
+			}
+
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		
+		return 0;
+	}
 	public String[] getMarketStockInformation() {
 		// TODO Auto-generated method stub
 		int Num = getNum();
@@ -281,13 +312,16 @@ public class getStockInformation {
 		
 		return YourTotalPrice;
 	}
-	public void sellStock(String symbol, double price, int shares, String theUser) {
+	public double sellStock(String symbol, double price, int shares, String theUser) {
 		// TODO Auto-generated method stub
 		SetStockPrice(symbol, price);
 		int share = getShare(symbol,theUser) - shares;
-		SetShare(symbol,share, theUser);
+		double ave_price = getAve_Price(symbol, theUser);
+		SetShare(symbol,share, theUser, ave_price);
+		double earned = price*shares - shares*ave_price;
+		return earned;
 	}
-	private void SetShare(String symbol, int shares, String theUser) {
+	private void SetShare(String symbol, int shares, String theUser, double price) {
 		// TODO Auto-generated method stub
 		int TaxId = 0;
 		int num = getyoutStockNum(theUser);
@@ -325,6 +359,15 @@ public class getStockInformation {
 			catch (Exception exc) {
 				exc.printStackTrace();
 			}
+			try {
+				String QUERY = "UPDATE Stock_Transaction SET Ave_Price = " + price + " WHERE Stock_Symbol = '" + symbol +"' AND TaxID = '"+ 
+					TaxId +"';";
+				//System.out.println(QUERY);
+				statement.executeUpdate(QUERY);
+			}
+			catch (Exception exc) {
+				exc.printStackTrace();
+			}
 		}
 		else {
 			int  rowcount = 0;
@@ -336,7 +379,7 @@ public class getStockInformation {
 				rowcount ++;
 
 				String AddAccount = "INSERT INTO Stock_Transaction VALUES ("+
-						"'" + rowcount + "', " + TaxId  + ", " + shares + ", '" + symbol +"');";
+						"'" + rowcount + "', " + TaxId  + ", " + shares + ", '" + symbol  +"'" + price +");";
 				statement.executeUpdate(AddAccount);
 			}
 			catch (Exception exc) {
@@ -361,9 +404,11 @@ public class getStockInformation {
 		// TODO Auto-generated method stub
 		SetStockPrice(symbol, price);
 		int share = getShare(symbol,theUser) + shares;
-		SetShare(symbol,share, theUser);
+		double ave_price = getAve_Price(symbol, theUser);
+		double new_ave = (getShare(symbol,theUser)*ave_price + shares*price)/share;
+		SetShare(symbol,share, theUser, new_ave);
 	}
-	public void AddRecord(String theUser, int Shares, String Stock_Symbol, String Type, double balance) {
+	public void AddRecord(String theUser, int Shares, String Stock_Symbol, String Type, double amount, double balance, double earned) {
 		Date Date=null;
 		try {
 			String Query = "SELECT Date FROM Manager WHERE Username='admin';";
@@ -376,13 +421,27 @@ public class getStockInformation {
 			exc.printStackTrace();
 		}
 		try {
-			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Balance, Date) VALUES ("+
-					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', " + balance +", " +"'"+ Date+ "');";
-			//System.out.println(query);
+			String query = "INSERT INTO Record (Username, Shares, Stock_Symbol, Type, Amount, Balance, Date, Earned) VALUES ("+
+					"'"+theUser+"', "+Shares +", '" +Stock_Symbol +"', '" + Type +"', "+ amount +", " + balance +", " +"'"+ Date+ "',"+ earned +");";
+			System.out.println(query);
 			statement.executeUpdate(query);
 		}
 		catch (Exception exc) {
 			exc.printStackTrace();
 		}
+	}
+	public Boolean getMarketStatus() {
+		// TODO Auto-generated method stub
+		
+		try {
+			String Query = "SELECT Market_Status FROM Manager WHERE Username='admin';";
+			ResultSet resultSet = statement.executeQuery(Query);
+			while(resultSet.next())
+				return resultSet.getBoolean("Market_Status");
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		return false;
 	}
 }
