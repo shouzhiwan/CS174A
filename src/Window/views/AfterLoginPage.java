@@ -128,6 +128,13 @@ public class AfterLoginPage extends JFrame {
 				setInvisible();
 			}
 		});
+		btnMyAccounts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MoviesPage mp = new MoviesPage();
+				mp.pop();
+				setInvisible();
+			}
+		});
 		
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

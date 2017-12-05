@@ -86,7 +86,7 @@ public class ManagerPage extends JFrame {
 	private void initComponents() {
 		// TODO Auto-generated method stub
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 493, 435);
+		setBounds(100, 100, 540, 435);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
