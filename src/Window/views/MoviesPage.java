@@ -32,11 +32,12 @@ public class MoviesPage extends JFrame {
 	JButton btnGoBack;
 	getMovieInformation movieInfo;
 	private JTextArea textArea;
-	public static void pop() {
+	String user;
+	public static void pop(String theUser) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MoviesPage frame = new MoviesPage();
+					MoviesPage frame = new MoviesPage(theUser);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,6 +46,12 @@ public class MoviesPage extends JFrame {
 		});
 	}
 	public MoviesPage() {
+		movieInfo = new getMovieInformation();
+		initComponents();
+		createEvent();	
+	}
+	public MoviesPage(String theUser) {
+		user = theUser;
 		movieInfo = new getMovieInformation();
 		initComponents();
 		createEvent();	
@@ -181,13 +188,26 @@ public class MoviesPage extends JFrame {
 				textArea.setText("");
 				String movie = movieField.getText();
 				String [] reviews = movieInfo.getReviews(movie);
+				String s = (String.format("%-15s %-15s \n", "Author", "Reviews")).toString();
+				textArea.append(s);
+				for(int i = 0; i<(reviews.length-1)/2;i++) {
+					s = String.format("%-15s %-15s \n", reviews[i], reviews[i+1]);
+					System.out.println(s);
+					textArea.append(s);
+				}
 			}
 		});
 		btnGoBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				AfterLoginPage alp = new AfterLoginPage();
+				alp.AfterLogin(user);
+				setInvisible();
 			}
 		});
+	}
+	protected void setInvisible() {
+		// TODO Auto-generated method stub
+		this.setVisible(false);
 	}
 
 }

@@ -75,7 +75,7 @@ public class AfterLoginPage extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		
 		btnMyInformation = new JButton("My Information");	
-		btnMyAccounts = new JButton("My Accounts");
+		btnMyAccounts = new JButton("Movies");
 		btnStockMarket = new JButton("Stock Market");
 		btnLogOut = new JButton("Log Out");
 		
@@ -131,7 +131,7 @@ public class AfterLoginPage extends JFrame {
 		btnMyAccounts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MoviesPage mp = new MoviesPage();
-				mp.pop();
+				mp.pop(user);
 				setInvisible();
 			}
 		});
