@@ -29,6 +29,7 @@ public class getMovieInformation {
 		String[] information = new String[8];
 		try {
 			String QUERY = "SELECT * FROM Customers WHERE Username = " + "'" +username + "'" +";";
+			System.out.println(QUERY);
 			ResultSet resultSet = statement.executeQuery(QUERY);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			//System.out.println(userExist);
@@ -72,6 +73,7 @@ public class getMovieInformation {
 			String findInfo = "SELECT S.Stock_Symbol, S.Current_Price, A.Name, A.Date_of_Birth, M.title, C.Role, M.production_year, C.Total_Value  "
 					+ " FROM Actor_Director_Has AS A, moviesDB.Movies AS M, Stock AS S, Contract C"
 					+ " WHERE C.M_id = M.id AND A.Sid = S.Sid AND C.AD_id = A.AD_id AND C.M_id = M.id;";
+			System.out.println(findInfo);
 			ResultSet resultSet = statement.executeQuery(findInfo);
 			int i = 0;
 			while(resultSet.next()) {
@@ -134,6 +136,7 @@ public class getMovieInformation {
 		int id = 0;
 		try {
 			String Findid = "SELECT id FROM moviesDB.Movies WHERE title = '" +movie +"';";;
+			System.out.println(Findid);
 			ResultSet resultSet = statement.executeQuery(Findid);
 			while(resultSet.next()) {
 				id = resultSet.getInt("id");
@@ -156,6 +159,7 @@ public class getMovieInformation {
 		String[] Reviews = new String[numRew*2+1];
 		try {
 			String Findrev = "SELECT author, review FROM moviesDB.Reviews WHERE movie_id = " +id +";";
+			System.out.println(Findrev);
 			ResultSet resultSet = statement.executeQuery(Findrev);
 			//int nums = resultSet.last() ? resultSet.getRow() : 0;
 			//System.out.println(nums);

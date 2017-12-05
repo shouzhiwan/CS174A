@@ -34,7 +34,6 @@ public class getStockInformation {
 			String count = "SELECT * FROM Stock";
 			ResultSet resultSet = statement.executeQuery(count);
 			int rowcount = resultSet.last() ? resultSet.getRow() : 0;
-			//System.out.println(rowcount);
 			return rowcount;
 		}
 		catch (Exception exc) {
@@ -66,6 +65,7 @@ public class getStockInformation {
 		int num = 0;
 		try {
 			String Query = "SELECT * FROM Customers WHERE Username = " + "'" + theUser + "'" +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -82,6 +82,7 @@ public class getStockInformation {
 		//System.out.println(TaxId);
 		try {
 			String Query = "SELECT * FROM Stock_Transaction WHERE TaxID = "  + TaxId  +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			num = resultSet.last() ? resultSet.getRow() : 0; 
 			
@@ -96,6 +97,7 @@ public class getStockInformation {
 		int num = 0;
 		try {
 			String Query = "SELECT * FROM Customers WHERE Username = " + "'" + theUser + "'" +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -199,6 +201,7 @@ public class getStockInformation {
 		// TODO Auto-generated method stub
 		try {
 			String Query = "SELECT * FROM Stock WHERE Stock_Symbol = " + "'" + symbol + "'" +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -233,6 +236,7 @@ public class getStockInformation {
 		}
 		try {
 			String Query = "SELECT * FROM Stock_Transaction WHERE Stock_Symbol = " + "'" + symbol + "'" + "AND TaxID = " + TaxId +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -319,6 +323,13 @@ public class getStockInformation {
 		double ave_price = getAve_Price(symbol, theUser);
 		SetShare(symbol,share, theUser, ave_price);
 		double earned = price*shares - shares*ave_price;
+		try {
+			String Query = "DELETE FROM Stock_Transaction WHERE Number_Shares=0;";
+			statement.executeUpdate(Query);			
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
 		return earned;
 	}
 	private void SetShare(String symbol, int shares, String theUser, double price) {
@@ -328,6 +339,7 @@ public class getStockInformation {
 		int userExist1 = 0;
 		try {
 			String Query = "SELECT * FROM Customers WHERE Username = " + "'" + theUser + "'" +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -353,7 +365,7 @@ public class getStockInformation {
 			try {
 				String QUERY = "UPDATE Stock_Transaction SET Number_Shares = " + shares + " WHERE Stock_Symbol = '" + symbol +"' AND TaxID = '"+ 
 					TaxId +"';";
-				//System.out.println(QUERY);
+				System.out.println(QUERY);
 				statement.executeUpdate(QUERY);
 			}
 			catch (Exception exc) {
@@ -362,7 +374,7 @@ public class getStockInformation {
 			try {
 				String QUERY = "UPDATE Stock_Transaction SET Ave_Price = " + price + " WHERE Stock_Symbol = '" + symbol +"' AND TaxID = '"+ 
 					TaxId +"';";
-				//System.out.println(QUERY);
+				System.out.println(QUERY);
 				statement.executeUpdate(QUERY);
 			}
 			catch (Exception exc) {
@@ -393,7 +405,7 @@ public class getStockInformation {
 		// TODO Auto-generated method stub
 		try {
 			String QUERY = "UPDATE Stock SET Current_Price = " + price + " WHERE Stock_Symbol = '" + symbol +"';";
-			//System.out.println(QUERY);
+			System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
 		}
 		catch (Exception exc) {

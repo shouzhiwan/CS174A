@@ -115,7 +115,9 @@ public class StockMarketPage extends JFrame {
 		System.arraycopy(stockInfo.getStockSym(), 0 , Stocks, 0 , NumStock); 
 		System.arraycopy(stockInfo.getUserStock(theUser), 0 , yourStocks, 0 , yourStockNum);
 		System.arraycopy(stockInfo.getMarketStockInformation(), 0 , MarketStockInfo, 0 , NumStock);
+		if(yourStockNum!=0){
 		System.arraycopy(stockInfo.getyourStockInformations(theUser), 0 , YourStockInfo, 0 , yourStockNum);
+		}
 		initComponents();
 		createEvent();	
 	}
@@ -124,7 +126,7 @@ public class StockMarketPage extends JFrame {
 		// TODO Auto-generated method stub
 		setTitle("Welcome to the Market " +this.user);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 611, 402);
+		setBounds(100, 100, 735, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -191,8 +193,10 @@ public class StockMarketPage extends JFrame {
 		MarketPriceField.setColumns(10);
 		DefaultListModel dlm = new DefaultListModel();
 		YourStocklist = new JList();
-		for(int i =0; i<yourStockNum; i++) {
-			dlm.addElement(YourStockInfo[i]);
+		if(yourStockNum!=0) {
+			for(int i =0; i<yourStockNum; i++) {
+				dlm.addElement(YourStockInfo[i]);
+			}
 		}
 		YourStocklist.setModel(dlm);
 		
@@ -231,19 +235,19 @@ public class StockMarketPage extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblMarketAccount)
-					.addContainerGap(496, Short.MAX_VALUE))
+					.addContainerGap(620, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblStockAccount)
 					.addGap(120)
 					.addComponent(btnGetInformation)
-					.addContainerGap(241, Short.MAX_VALUE))
+					.addContainerGap(365, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(92)
 					.addComponent(btnMyInformation)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnRefresh)
-					.addContainerGap(272, Short.MAX_VALUE))
+					.addContainerGap(396, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -263,10 +267,11 @@ public class StockMarketPage extends JFrame {
 												.addComponent(lblYourStocks)
 												.addComponent(lblStockMarket))
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addComponent(YourStockcomboBox, 0, 112, Short.MAX_VALUE)
-												.addComponent(MarketStockcomboBox, 0, 112, Short.MAX_VALUE)))
-										.addComponent(YourStocklist, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+												.addComponent(MarketStockcomboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(YourStockcomboBox, 0, 115, Short.MAX_VALUE))
+											.addPreferredGap(ComponentPlacement.RELATED, 121, Short.MAX_VALUE))
+										.addComponent(YourStocklist, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
 									.addPreferredGap(ComponentPlacement.RELATED)))
 							.addGap(31)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)

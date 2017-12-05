@@ -29,7 +29,7 @@ public class getMyInformation {
 			String QUERY = "SELECT * FROM Customers WHERE Username = " + "'" +username + "'" +";";
 			ResultSet resultSet = statement.executeQuery(QUERY);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
-			//System.out.println(userExist);
+			System.out.println(QUERY);
 			if(userExist == 1) {
 				information[0] = resultSet.getString("Name");
 				information[1] = resultSet.getString("Email");
@@ -53,7 +53,7 @@ public class getMyInformation {
 			String QUERY = "UPDATE Customers SET NAME ='" + information[0] + "', Email='" + information[1] + "', TaxID='" +
 					information[2] + "', State='" + information[3] + "', Phone='" + information[4] + "', SSN='" + information[5] + "', Address='" + information[6] + 
 					"' WHERE Username = " + "'" + user + "'" + ";";
-			//System.out.println(QUERY);
+			System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
 			return true;
 		}
@@ -69,7 +69,7 @@ public class getMyInformation {
 		try {
 			String QUERY = "UPDATE Customers SET Password ='" + newpassword + 
 					"' WHERE Username = " + "'" + user + "'" +";";
-			//System.out.println(QUERY);
+			System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
 			return true;
 		}

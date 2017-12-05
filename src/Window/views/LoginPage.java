@@ -22,6 +22,8 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 
@@ -62,7 +64,7 @@ public class LoginPage extends JFrame {
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		setTitle("Log In For the Stock Trade");
+		setTitle("Welcome to STARSRUS System");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,6 +85,12 @@ public class LoginPage extends JFrame {
 		
 		btnLogIn = new JButton("Log In");
 
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(LoginPage.class.getResource("/Window/recourses/STARSRUS.png")));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -90,27 +98,37 @@ public class LoginPage extends JFrame {
 					.addContainerGap(64, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnRegister)
-							.addGap(18)
-							.addComponent(btnLogIn))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblUsername)
-								.addComponent(lblPassword))
-							.addGap(45)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(139))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnRegister)
+									.addGap(18)
+									.addComponent(btnLogIn))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblUsername)
+										.addComponent(lblPassword))
+									.addGap(45)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblNewLabel))))
+							.addGap(139))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_1)
+							.addGap(40))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(81)
+					.addGap(31)
+					.addComponent(lblNewLabel)
+					.addGap(34)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblUsername)
 						.addComponent(usernameField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(33)
+					.addGap(4)
+					.addComponent(lblNewLabel_1)
+					.addGap(13)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPassword))
@@ -121,6 +139,7 @@ public class LoginPage extends JFrame {
 					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+		getRootPane().setDefaultButton(btnLogIn);
 		
 	}
 	private void createEvent() {
@@ -133,6 +152,36 @@ public class LoginPage extends JFrame {
 			}
 		});
 		
+		btnLogIn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				 if(e.getKeyCode() == KeyEvent.VK_ENTER)
+				 {
+						String  urn = usernameField.getText();
+						String pwd = new String(passwordField.getPassword());
+
+						if(urn.equals("") || pwd.equals("")) {
+							JOptionPane.showMessageDialog(null, "Invalid Input");			
+						}
+						else {
+							Drive d = new Drive();
+							String information = d.getInfo(urn, pwd);
+							if(information.equals("correct")) {
+								AfterLoginPage alp = new AfterLoginPage();
+								alp.AfterLogin(urn);
+								setInvisible();
+							}
+							else if (information.equals("manager")) {
+								JOptionPane.showMessageDialog(null, "Hello Manager");		
+								ManagerPage mg = new ManagerPage();
+								mg.Manager(urn);
+								setInvisible();
+							}
+						}
+						//JOptionPane.showMessageDialog(null, information);
+					}
+			}
+		});
 		btnLogIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String  urn = usernameField.getText();
@@ -167,5 +216,4 @@ public class LoginPage extends JFrame {
 		// TODO Auto-generated method stub
 		this.setVisible(false);
 	}
-
 }

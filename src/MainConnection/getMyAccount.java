@@ -47,6 +47,7 @@ public class getMyAccount {
 		double Balance = 0;
 		try {
 			String Query = "SELECT * FROM Stock_Account WHERE Username = " + "'" + theUser + "'" +";";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int userExist = resultSet.last() ? resultSet.getRow() : 0;
 			if(userExist == 1) {
@@ -69,7 +70,7 @@ public class getMyAccount {
 			rowcount ++;
 			String AddAccount = "INSERT INTO Stock_Account VALUES ("+
 				"'" + rowcount + "', " + 0.00 + ", '" + theUser +"');";
-			//System.out.println(AddAccount);
+			System.out.println(AddAccount);
 			statement.executeUpdate(AddAccount);
 			return true;
 		}
@@ -99,7 +100,7 @@ public class getMyAccount {
 		try {
 			String QUERY = "UPDATE " + Type +" SET Balance =" + amount + 
 					" WHERE Username = " + "'" + theUser + "'" +";";
-			//System.out.println(QUERY);
+			System.out.println(QUERY);
 			statement.executeUpdate(QUERY);
 		}
 		catch (Exception exc) {

@@ -48,6 +48,7 @@ public class Drive {
 			String AddAccount = "INSERT INTO Market_Account_Have VALUES ("+
 					"'" + rowcount + "', " + "'"+ information[4] + "', " + 0.00 + ", " + 1000 +");";
 			statement.executeUpdate(Query);
+			System.out.println(Query);
 			System.out.println(AddAccount);
 			statement.executeUpdate(AddAccount);
 			//statement.setString(1, information[4]);
@@ -83,6 +84,7 @@ public class Drive {
 				// Execute SQL
 				//get value
 				String QUERY = "SELECT * FROM Customers WHERE Username = " + "'" +username + "'" +";";
+				System.out.println(QUERY);
 				//String QUERY = "SELECT * FROM Customers WHERE Username = 'shouzhiwan'";
 				ResultSet resultSet = statement.executeQuery(QUERY);
 				int userExist = resultSet.last() ? resultSet.getRow() : 0;
@@ -102,6 +104,7 @@ public class Drive {
 				try {
 					statement = connection.createStatement();
 					String QUERY = "SELECT * FROM Manager WHERE Username = " + "'" +username + "'" +";";
+					System.out.println(QUERY);
 					ResultSet resultSet = statement.executeQuery(QUERY);
 					int userExist = resultSet.last() ? resultSet.getRow() : 0;
 					if(userExist == 1)

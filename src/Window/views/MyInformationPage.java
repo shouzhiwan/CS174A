@@ -82,7 +82,8 @@ public class MyInformationPage extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		btnMyAccount = new JButton("My Account");
+		btnMyAccount = new JButton("Movies");
+		
 		btnStockMarket = new JButton("Stock Market");
 		btnGoBack = new JButton("Go Back");
 		
@@ -285,7 +286,13 @@ public class MyInformationPage extends JFrame {
 				setInvisible();
 			}
 		});
-		
+		btnMyAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MoviesPage mp = new MoviesPage();
+				mp.pop(user);
+				setInvisible();
+			}
+		});
 		
 	}
 	protected void setInvisible() {

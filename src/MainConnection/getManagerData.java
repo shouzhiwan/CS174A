@@ -34,6 +34,7 @@ public class getManagerData {
 		Date Date=null;
 		try {
 			String Query = "SELECT Date FROM Manager WHERE Username='admin';";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			while(resultSet.next())
 				Date = resultSet.getDate("Date");
@@ -47,6 +48,7 @@ public class getManagerData {
 	public int getNumusr(){
 		try {
 			String Query = "SELECT Username, Balance FROM Market_Account_Have;";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			return resultSet.last() ? resultSet.getRow() : 0;
 		}
@@ -62,6 +64,7 @@ public class getManagerData {
 		Double [] Balance = new Double[numUsers];
 		try {
 			String Query = "SELECT Username, Balance FROM Market_Account_Have;";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			int i=0;
 			while(resultSet.next()) {
@@ -77,6 +80,7 @@ public class getManagerData {
 		try {
 			for(int i=0;i<numUsers;i++) {
 				String Query = "INSERT INTO Daily_Balance VALUES ( '" + Username[i] +"', " + Balance[i] + ", '" + date +"');" ;
+				System.out.println(Query);
 				statement.executeUpdate(Query);
 			}
 			return true;
@@ -95,6 +99,7 @@ public class getManagerData {
 		System.out.println(date);
 		try {
 			String Query = "UPDATE Manager SET Date = '" + date + "' ;" ;
+			System.out.println(Query);
 			statement.executeUpdate(Query);
 			return true;
 		}
@@ -111,6 +116,7 @@ public class getManagerData {
 		int numUser = 0;
 		try {
 			String FindCount = "SELECT * FROM Market_Account_Have;";
+			System.out.println(FindCount);
 			ResultSet resultSet = statement.executeQuery(FindCount);
 			numUser = resultSet.last() ? resultSet.getRow() : 0;
 			System.out.println(numUser);
@@ -124,6 +130,7 @@ public class getManagerData {
 		int numDays = 0;
 		try {
 			String FindCount = "SELECT Date FROM Daily_Balance GROUP BY Date;";
+			System.out.println(FindCount);
 			ResultSet resultSet = statement.executeQuery(FindCount);
 			numDays = resultSet.last() ? resultSet.getRow() : 0;
 			System.out.println(numDays);
@@ -135,6 +142,7 @@ public class getManagerData {
 		Double MonthlyInterest = Interest/12;
 		try {
 			String Query = "SELECT SUM(Balance) AS Total, Username FROM Daily_Balance GROUP BY Username;";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			System.out.println(numDays);
 			int i = 0;
@@ -152,6 +160,7 @@ public class getManagerData {
 			System.out.println(theUsers[i] + " " + interests[i]);
 			try {
 				String Query = "UPDATE Market_Account_Have SET Interest = " + interests[i] + "WHERE Username = '" +theUsers[i] + "';";	
+				System.out.println(Query);
 				statement.executeUpdate(Query);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -170,6 +179,7 @@ public class getManagerData {
 		// TODO Auto-generated method stub
 		try {
 			String Query = "UPDATE Manager SET Market_Status = " +b + " WHERE Username = 'admin';";	
+			System.out.println(Query);
 			statement.executeUpdate(Query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -183,6 +193,7 @@ public class getManagerData {
 		int num=0;
 		try {
 			String findnum = "SELECT * FROM Market_Account_Have;";
+			System.out.println(findnum);
 			ResultSet resultSet = statement.executeQuery(findnum);
 			num = resultSet.last() ? resultSet.getRow() : 0;
 		}
@@ -386,6 +397,7 @@ public class getManagerData {
 	private String getResidence(String Username) {
 		try {
 			String findUser = "SELECT State FROM Customers WHERE Username = '"+ Username +"';";
+			System.out.println(findUser);
 			ResultSet resultSet = statement.executeQuery(findUser);
 			return resultSet.getString("State");
 			
@@ -400,6 +412,7 @@ public class getManagerData {
 	private String getTaxID(String Username) {
 		try {
 			String findUser = "SELECT TaxID FROM Customers WHERE Username = '"+ Username +"';";
+			System.out.println(findUser);
 			ResultSet resultSet = statement.executeQuery(findUser);
 			return Integer.toString(resultSet.getInt("TaxID"));
 			
@@ -416,6 +429,7 @@ public class getManagerData {
 		
 		try {
 			String Query = "SELECT Market_Status FROM Manager WHERE Username='admin';";
+			System.out.println(Query);
 			ResultSet resultSet = statement.executeQuery(Query);
 			while(resultSet.next())
 				return resultSet.getBoolean("Market_Status");
@@ -429,6 +443,7 @@ public class getManagerData {
 	public void SetStockPrice() {
 		try {
 			String FindPrice = "UPDATE Stock SET Closing_Price = Current_Price";
+			System.out.println(FindPrice);
 			statement.executeUpdate(FindPrice);
 		}
 		catch (SQLException e) {
