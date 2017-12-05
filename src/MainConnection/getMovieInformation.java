@@ -155,22 +155,22 @@ public class getMovieInformation {
 		}
 		String[] Reviews = new String[numRew*2+1];
 		try {
-			String Findid = "SELECT author review FROM moviesDB.Reviews WHERE movie_id = " +id +";";;
+			String Findid = "SELECT author, review FROM moviesDB.Reviews WHERE movie_id = " +id +";";
 			ResultSet resultSet = statement.executeQuery(Findid);
-			numRew = resultSet.last() ? resultSet.getRow() : 0;
 			int i = 0;
 			while(resultSet.next()) {
 				Reviews[i*2] = resultSet.getString("author");
-				Reviews[i*2+1] = resultSet.getString("reviews");
-				i++;
+				Reviews[i*2+1] = resultSet.getString("review");
+				i++;			
 			}
+			return Reviews;
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 		
-		return Reviews;
 	}
 	
 }

@@ -191,7 +191,7 @@ public class MoviesPage extends JFrame {
 				String s = (String.format("%-15s %-15s \n", "Author", "Reviews")).toString();
 				textArea.append(s);
 				for(int i = 0; i<(reviews.length-1)/2;i++) {
-					s = String.format("%-15s %-15s \n", reviews[i], reviews[i+1]);
+					s = String.format("%-15s %-15s \n", reviews[i*2], reviews[i*2+1]);
 					System.out.println(s);
 					textArea.append(s);
 				}
