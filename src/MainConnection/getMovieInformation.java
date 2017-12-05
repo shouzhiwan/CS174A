@@ -155,10 +155,13 @@ public class getMovieInformation {
 		}
 		String[] Reviews = new String[numRew*2+1];
 		try {
-			String Findid = "SELECT author, review FROM moviesDB.Reviews WHERE movie_id = " +id +";";
-			ResultSet resultSet = statement.executeQuery(Findid);
+			String Findrev = "SELECT author, review FROM moviesDB.Reviews WHERE movie_id = " +id +";";
+			ResultSet resultSet = statement.executeQuery(Findrev);
+			//int nums = resultSet.last() ? resultSet.getRow() : 0;
+			//System.out.println(nums);
 			int i = 0;
 			while(resultSet.next()) {
+				//System.out.println(resultSet.getString("author"));
 				Reviews[i*2] = resultSet.getString("author");
 				Reviews[i*2+1] = resultSet.getString("review");
 				i++;			
