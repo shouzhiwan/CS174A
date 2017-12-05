@@ -425,5 +425,15 @@ public class getManagerData {
 		}
 		return false;
 	}
+
+	public void SetStockPrice() {
+		try {
+			String FindPrice = "UPDATE Stock SET Closing_Price = Current_Price";
+			statement.executeUpdate(FindPrice);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

@@ -304,6 +304,7 @@ public class ManagerPage extends JFrame {
 					try {
 						md.addDate(theDate);
 						theDate = md.getDate(user);
+						md.SetStockPrice();
 						lblDate.setText("Date: " + theDate);
 					} catch (ParseException e1) {
 						e1.printStackTrace();
