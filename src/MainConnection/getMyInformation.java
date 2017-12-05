@@ -12,9 +12,9 @@ public class getMyInformation {
 	public getMyInformation() {
 		try {
 			//String HOST = "jdbc:mysql://127.0.0.1:3306/ShouzhiwanDB";
-			String HOST = "jdbc:mysql://localhost:3306/jinfaDB?autoReconnect=true&useSSL=false";
-			String USER = "root";
-			String PWD  = "81822188";
+			String HOST = "jdbc:mysql://cs174a.engr.ucsb.edu:3306/jinfaDB?autoReconnect=true&useSSL=false";
+			String USER = "jinfa";
+			String PWD  = "901";
 			connection = DriverManager.getConnection(HOST, USER, PWD);
 			statement = connection.createStatement();
 		}
